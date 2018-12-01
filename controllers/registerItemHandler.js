@@ -6,10 +6,13 @@ function RegisterItemHandler(){
 }
 
 RegisterItemHandler.prototype.makeRegisterItem = function(lenderID){
-  this.rsList.addRegistrationService(lenderID,require('../models/registrationService').create())
+  this.rsList.push(lenderID,require('../models/registrationService').create())
   console.dir(this.rsList);
 }
 
+RegisterItemHandler.prototype.enterItemInfo = function(lenderID,data){
+  
+}
 
 
 

@@ -18,7 +18,19 @@ router.get('/registerItem', function (req, res, next) {
     res.send("<script>alert('not valid!');history.back();</script>")
 });
 
-router.post('/registeraction', function (req, res) {
+
+router.post('/enterItemInfo',function(req,res){
+  var params = req.body
+  var data = {
+    "name":params.name,
+    "category":params.category,
+    "keyword":params.keyword,
+    "deposit":Number(params.deposit),
+    "policy":params.policy,
+    "term": Number(params.term),
+    "location":params.location,
+    "statuses":[Number(params.s0),Number(params.s1),Number(params.s2),Number(params.s3),Number(params.s4)]
+  };
 
 });
 

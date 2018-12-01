@@ -37,11 +37,39 @@ DBmanager.prototype.login = function(id,pw,callback){
         callback(err,null);
       else
         callback(null,results);
+      conn.release();
     });
     
     
   });
 };
+
+
+DBmanager.prototype.getmaxsn = function(callback){
+  var query = "SELECT MAX(sn) FROM item";
+  this.pool.getConnection(function(err,conn){
+    conn.query(query,function(err,results){
+      if(err)
+        throw err;
+      callback(results[0]["MAX(sn)"]);  
+    });
+  });
+};
+
+DBmanager.prototype.getmaxitemid = function(callback){
+  var query = "SELECT MAX(itemID) FROM itemdes";
+  this.pool.getConnection(function(err,conn){
+    conn.query(query,function(err,results){
+      if(err)
+        throw err;
+      callback(results[0]["MAX(itemID)"]);  
+    });
+  });
+}
+
+DBmanager.prototype.registerItemDes = function(callback){
+  var query = ""
+}
 
 
 
