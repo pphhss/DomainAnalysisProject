@@ -5,9 +5,7 @@
 var session = function(req,res,next){
   var sending;
   if(req.session.user){
-    sending = {
-      "id":req.session.user.id,
-    };
+    sending = req.session.user.id;
     sending = JSON.stringify(sending);
   }else{
     sending="none"
