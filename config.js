@@ -2,7 +2,7 @@
 config = {
 
   db : {
-     connectionLimit : 10,
+     connectionLimit : 50,
      host : "localhost",
      user : "root",
      password : "root",

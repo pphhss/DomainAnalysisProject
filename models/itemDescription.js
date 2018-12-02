@@ -1,6 +1,8 @@
 var itemcreator = require('./item');
 var DBmanager = require('../facade/DBmanager').getInstance();
 
+var me = null;
+
 function itemDescription(lenderID, data) {
   this.name = data.name;
   this.category = data.category;
@@ -15,24 +17,50 @@ function itemDescription(lenderID, data) {
   this.itemID = 0;
   this.leftQuan = 0;
   this.lenderID = lenderID;
+  me = this;
 
-  for (var i = 0; i < data.statuses.length; i++)
-    for (var j = 0; j < data.statuses[i]; j++){
-      this.availList.push(itemcreator.create(i));
-      (this.leftQuan)++;
+  DBmanager.getmaxsn(function (maxsn) {
+
+
+    //create  item instance.
+    for (var i = 0; i < data.statuses.length; i++)
+      for (var j = 0; j < data.statuses[i]; j++) {
+
+        maxsn++;
+        me.availList.push(itemcreator.create(i, maxsn));
+        (me.leftQuan)++;
+      }
+
+    for (var i = 0; i < data.rentalFee.length; i++) {
+      me.rentalFee.push(data.rentalFee[i]);
     }
-  
-  for (var i=0;i<data.rentalFee.length;i++){
-    this.rentalFee.push(data.rentalFee[i]);
-  }
 
-  DBmanager.getmaxitemid(function(maxitemID){
-    this.itemID = maxitemID + 1;
-  })
+    //setting itemID
+    DBmanager.getmaxitemid(function (maxitemID) {
+      me.itemID = maxitemID + 1;
+
+      // record  into DB
+      var j = 0;
+      DBmanager.recordItemDes(me, function () {
+        for (var i = 0; i < me.availList.length; i++) {
+          
+          DBmanager.recordItem(me.availList[i], function () {
+
+            DBmanager.recordItemDes_Item(me.itemID, me.availList[j++]);
+          });
+        }
+
+      });
+    })
+
+  });
+
+
+
 }
 
 
 
-exports.create = function(lenderID,data){
-  return new itemDescription(lenderID,data);
+exports.create = function (lenderID, data) {
+  return new itemDescription(lenderID, data);
 }

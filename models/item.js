@@ -1,14 +1,12 @@
 var DBmanager = require('../facade/DBmanager').getInstance();
-function Item(status){
+function Item(status,sn){
   this.status = status;
-  this.sn = 0;
-  DBmanager.getmaxsn(function(maxsn){
-    this.sn = maxsn+1;
-  });
+  this.sn = sn;
+  
 }
 
 
 
-exports.create = function(status){
-  return new Item(status);
+exports.create = function(status,sn){
+  return new Item(status,sn);
 }
