@@ -6,7 +6,8 @@ function RegistrationService(){
 }
 
 RegistrationService.prototype.setItemInfo = function(lenderID,data){
-
+  this.itemdes = require('./itemDescription').create(lenderID,data);
+  console.dir(this.itemdes);
 }
 
 

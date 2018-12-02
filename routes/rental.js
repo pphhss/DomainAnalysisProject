@@ -29,9 +29,12 @@ router.post('/enterItemInfo',function(req,res){
     "policy":params.policy,
     "term": Number(params.term),
     "location":params.location,
+    "rentalFee":[Number(params.r0),Number(params.r1),Number(params.r2),Number(params.r3),Number(params.r4)],
     "statuses":[Number(params.s0),Number(params.s1),Number(params.s2),Number(params.s3),Number(params.s4)]
   };
+  require('../controllers/registerItemHandler').getInstance().enterItemInfo(req.session.user.id,data);
 
+  res.redirect('/');
 });
 
 module.exports = router;

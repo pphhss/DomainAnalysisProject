@@ -68,7 +68,7 @@ DBmanager.prototype.getmaxitemid = function(callback){
 }
 
 DBmanager.prototype.registerItemDes = function(callback){
-  var query = ""
+  var query = "INSERT INTO "
 }
 
 
