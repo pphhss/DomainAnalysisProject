@@ -7,12 +7,12 @@ var router = express.Router();
  *  if lender click registerItem.
  * 
  */
-router.get('/registerItem', function (req, res, next) {
+router.get('/', function (req, res, next) {
   if (req.session.user) {
     var registerItemHandler = require('../controllers/registerItemHandler').getInstance();
     registerItemHandler.makeRegisterItem(req.session.user.id);
 
-    res.render('layouts/layout', { body:"../rentalStore/registerItem",title: "good",session: req.csession });
+    res.render('layouts/layout', { body:"../registerItem/registerItem",title: "good",session: req.csession });
   }
   else
     res.send("<script>alert('not valid!');history.back();</script>")

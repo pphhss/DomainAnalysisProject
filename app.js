@@ -7,7 +7,8 @@ var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
-var rentalRouter = require('./routes/rental');
+var registerRouter = require('./routes/registerItem');
+var borrowRouter = require('./routes/borrowItem');
 
 var expresslayout = require('express-ejs-layouts');
 
@@ -41,7 +42,8 @@ app.use(csessionManager) //setting client session.
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
-app.use('/rentalStore',rentalRouter);
+app.use('/registerItem',registerRouter);
+app.use('/borrowItem',borrowRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

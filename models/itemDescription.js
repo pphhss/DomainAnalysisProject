@@ -43,10 +43,12 @@ function itemDescription(lenderID, data) {
       var j = 0;
       DBmanager.recordItemDes(me, function () {
         for (var i = 0; i < me.availList.length; i++) {
-          
-          DBmanager.recordItem(me.availList[i], function () {
 
-            DBmanager.recordItemDes_Item(me.itemID, me.availList[j++]);
+          DBmanager.recordItem(me.availList[i], function () {
+            setTimeout(() => {
+              DBmanager.recordItemDes_Item(me.itemID, me.availList[j++]);
+            }, 80);
+
           });
         }
 

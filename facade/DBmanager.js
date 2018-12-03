@@ -69,6 +69,7 @@ DBmanager.prototype.getmaxitemid = function (callback) {
 
 DBmanager.prototype.recordItem = function (item,callback) {
   var query2 = "INSERT INTO item SET ?"
+  console.log("ITEM"+item.sn)
   var data2 = {
     "sn": item.sn,
     "status": item.status
@@ -88,7 +89,7 @@ DBmanager.prototype.recordItem = function (item,callback) {
 
 DBmanager.prototype.recordItemDes_Item = function (itemID, item) {
   var query3 = "INSERT INTO itemdes_item SET ?"
-  
+  console.log("ITEMDESITEM"+item.sn)
   var data3 = {
     "itemID": itemID,
     "sn": item.sn,
@@ -147,7 +148,21 @@ DBmanager.prototype.recordItemDes = function (itemdes, callback) {
 }
 
 
-
+DBmanager.prototype.getInfo = function(ID,callback){
+  var sql = "SELECT point FROM user WHERE id="+this.pool.escape(ID);
+  this.pool.getConnection(function(err,conn){
+    if(err)
+      throw err;
+    conn.query(sql,function(err,results){
+      if(err)
+        callback(err,null)
+      else
+        callback(null,results[0])
+      conn.release();
+      
+    });
+  });
+}
 
 
 
