@@ -164,7 +164,30 @@ DBmanager.prototype.getInfo = function(ID,callback){
   });
 }
 
+DBmanager.prototype.getmaxrentalid = function(callback){
+  var query = "SELECT MAX(rentalID) FROM rentalservice";
+  this.pool.getConnection(function (err, conn) {
+    conn.query(query, function (err, results) {
+      if (err)
+        throw err;
+      callback(results[0]["MAX(rentalID)"]);
+    });
+  });
+}
 
+DBmanager.prototype.getSearchInfo = function(keyword,category,callback){
+  var query = "SELECT * FROM (SELECT itemID,name,term,deposit,rentalFee0,rentalFee1,rentalFee2,rentalFee3,rentalFee4,leftQuan FROM itemdes WHERE keyword LIKE '%"+keyword+"%' OR category LIKE '%"+category+"%') t1 INNER JOIN (SELECT itemID,count(itemID) FROM itemdes_item GROUP BY itemID) t2 ON t1.itemID = t2.itemID "
+
+  this.pool.getConnection(function(err,conn){
+    if(err)
+      throw err;
+    conn.query(query,function(err,results){
+      if(err)
+        throw err;
+      callback(results);
+    });
+  });
+}
 
 
 exports.getInstance = function () {

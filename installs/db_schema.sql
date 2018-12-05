@@ -48,6 +48,18 @@ CREATE TABLE itemdes_item(
   FOREIGN KEY(sn) REFERENCES item(sn)
 );
 
+CREATE TABLE rentalservice(
+  rentalID int(10) not null,
+  rentalFee int(10) not null,
+  rentalTerm int(10) not null,
+  borrowingLocation varchar(100) not null,
+  datetime datetime,
+  rentalItemListID int(10) not null,
+  borrowerID varchar(100) not null,
+  PRIMARY KEY(rentalID),
+  FOREIGN KEY(borrowerID) REFERENCES user(id),
+)
+
 
 
 INSERT INTO user VALUES('lender','1234',1000);

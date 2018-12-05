@@ -71,7 +71,7 @@
             case 3:
               text = results[i]["deposit"];
               break;
-            case 3:
+            case 4:
               text = results[i]["avgRentalFee"];
               break;
             case 5:
@@ -107,7 +107,7 @@
 
         }
       }
-      xhttp.open("GET", "/borrowItem/search?category=" + category + "&keyword=" + keyword, true);
+      xhttp.open("GET", "/borrowItem/inputSearchInfo?category=" + category + "&keyword=" + keyword, true);
       xhttp.send();
     }
   </script>

@@ -5,18 +5,22 @@ var me = null;
 function RentalService(borrowerID) {
   this.borrowerID = borrowerID;
   this.borrowerInfo = null;
+  this.rentalID = 0;
   me = this;
 
-  DBmanger.getInfo(borrowerID,function(err,result){
-    if(err)
+
+  DBmanger.getInfo(me.borrowerID, function (err, result) {
+    if (err)
       throw err;
-    me.borrowerInfo = require('./borrowerInfo').create(borrowerID,result.point)
+    me.borrowerInfo = require('./borrowerInfo').create(me.borrowerID, result.point)
     console.dir(me);
   });
 
+
+
+
+
 }
-
-
 
 
 
