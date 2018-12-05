@@ -67,9 +67,9 @@ DBmanager.prototype.getmaxitemid = function (callback) {
   });
 }
 
-DBmanager.prototype.recordItem = function (item,callback) {
+DBmanager.prototype.recordItem = function (item, callback) {
   var query2 = "INSERT INTO item SET ?"
-  console.log("ITEM"+item.sn)
+  console.log("ITEM" + item.sn)
   var data2 = {
     "sn": item.sn,
     "status": item.status
@@ -89,13 +89,13 @@ DBmanager.prototype.recordItem = function (item,callback) {
 
 DBmanager.prototype.recordItemDes_Item = function (itemID, item) {
   var query3 = "INSERT INTO itemdes_item SET ?"
-  console.log("ITEMDESITEM"+item.sn)
+  console.log("ITEMDESITEM" + item.sn)
   var data3 = {
     "itemID": itemID,
     "sn": item.sn,
     "borrowable": 1,
   }
-  
+
   this.pool.getConnection(function (err, conn) {
     if (err)
       throw err;
@@ -109,7 +109,7 @@ DBmanager.prototype.recordItemDes_Item = function (itemID, item) {
 
 DBmanager.prototype.recordItemDes = function (itemdes, callback) {
   var query1 = "INSERT INTO itemdes SET ?"
- 
+
 
 
   var data1 = {
@@ -148,23 +148,23 @@ DBmanager.prototype.recordItemDes = function (itemdes, callback) {
 }
 
 
-DBmanager.prototype.getInfo = function(ID,callback){
-  var sql = "SELECT point FROM user WHERE id="+this.pool.escape(ID);
-  this.pool.getConnection(function(err,conn){
-    if(err)
+DBmanager.prototype.getInfo = function (ID, callback) {
+  var sql = "SELECT point FROM user WHERE id=" + this.pool.escape(ID);
+  this.pool.getConnection(function (err, conn) {
+    if (err)
       throw err;
-    conn.query(sql,function(err,results){
-      if(err)
-        callback(err,null)
+    conn.query(sql, function (err, results) {
+      if (err)
+        callback(err, null)
       else
-        callback(null,results[0])
+        callback(null, results[0])
       conn.release();
-      
+
     });
   });
 }
 
-DBmanager.prototype.getmaxrentalid = function(callback){
+DBmanager.prototype.getmaxrentalid = function (callback) {
   var query = "SELECT MAX(rentalID) FROM rentalservice";
   this.pool.getConnection(function (err, conn) {
     conn.query(query, function (err, results) {
@@ -175,18 +175,68 @@ DBmanager.prototype.getmaxrentalid = function(callback){
   });
 }
 
-DBmanager.prototype.getSearchInfo = function(keyword,category,callback){
-  var query = "SELECT * FROM (SELECT itemID,name,term,deposit,rentalFee0,rentalFee1,rentalFee2,rentalFee3,rentalFee4,leftQuan FROM itemdes WHERE keyword LIKE '%"+keyword+"%' OR category LIKE '%"+category+"%') t1 INNER JOIN (SELECT itemID,count(itemID) FROM itemdes_item GROUP BY itemID) t2 ON t1.itemID = t2.itemID "
+DBmanager.prototype.getSearchInfo = function (keyword, category, callback) {
+  var query = "SELECT * FROM (SELECT itemID,name,term,deposit,rentalFee0,rentalFee1,rentalFee2,rentalFee3,rentalFee4,leftQuan FROM itemdes WHERE keyword LIKE '%" + keyword + "%' OR category LIKE '%" + category + "%') t1 INNER JOIN (SELECT itemID,count(itemID) FROM itemdes_item GROUP BY itemID) t2 ON t1.itemID = t2.itemID "
 
-  this.pool.getConnection(function(err,conn){
-    if(err)
+  this.pool.getConnection(function (err, conn) {
+    if (err)
       throw err;
-    conn.query(query,function(err,results){
-      if(err)
+    conn.query(query, function (err, results) {
+      if (err)
         throw err;
       callback(results);
     });
   });
+}
+
+DBmanager.prototype.getItemDes = function (itemID, callback) {
+  var query = "SELECT * FROM itemdes WHERE itemID = " + itemID;
+  this.pool.getConnection(function (err, conn) {
+    if (err)
+      throw err;
+    conn.query(query, function (err, results) {
+      if (err)
+        throw err;
+      callback(results[0]);
+    });
+  })
+}
+
+DBmanager.prototype.getItemDesList = function (itemID, callback) {
+  var avail = []
+  var used = []
+  var query = "SELECT * FROM itemdes_item WHERE itemID = " + itemID;
+  this.pool.getConnection(function (err, conn) {
+    if (err)
+      throw err;
+    conn.query(query, function (err, results) {
+      if (err)
+        throw err;
+      for (var i = 0; i < results.length; i++) {
+        if (results[i].borrowable == 1)
+          avail.push(results[i].sn);
+        else
+          used.push(results[i].sn);
+      }
+      conn.release();
+      callback(avail, used);
+    });
+  });
+}
+
+DBmanager.prototype.getItemInfo = function (sn, callback) {
+  var sql = "SELECT * FROM item WHERE sn=" + sn;
+  this.pool.getConnection(function (err, conn) {
+    if (err)
+      throw err;
+    conn.query(sql, function (err, results) {
+      if (err)
+        throw err;
+      conn.release();
+      callback(results[0]);
+
+    })
+  })
 }
 
 

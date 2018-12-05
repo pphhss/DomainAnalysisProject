@@ -1,0 +1,97 @@
+<body>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ItemID</th>
+        <td scope="col" id="itemID">1234</td>
+        <th scope="col">Name</th>
+        <td scope="col" id="name">사과</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">LeftQuantity</th>
+        <td id="leftQuan">4000</td>
+        <th>Deposit</th>
+        <td id="deposit">40000</td>
+      </tr>
+      <tr>
+        <th scope="row">Policy</th>
+        <td id="policy">이렇궁저렇궁</td>
+        <th>Term</th>
+        <td id="term">50000</td>
+      </tr>
+      <tr>
+        <th scope="row">Location</th>
+        <td id="location">Ajou University</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Status</th>
+        <th scope="col">RentalFee</th>
+        <th scope="col">leftQuantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">0</th>
+        <td id="rentalFee0">12313</td>
+        <td id="lq0">4</td>
+      </tr>
+      <tr>
+        <th scope="row">1</th>
+        <td id="rentalFee1">50000</td>
+        <td id="lq1">4</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td id="rentalFee2">50000</td>
+        <td id="lq2">4</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td id="rentalFee3">50000</td>
+        <td id="lq3">4</td>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td id="rentalFee4">50000</td>
+        <td id="lq4">4</td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    function update(info){
+      document.getElementById('itemID').innerHTML=info.itemID;
+      document.getElementById('name').innerHTML=info.name;
+     document.getElementById('leftQuan').innerHTML=info.leftQuan;
+     document.getElementById('deposit').innerHTML=info.deposit;
+     document.getElementById('policy').innerHTML=info.policy;
+     document.getElementById('term').innerHTML=info.term;
+     document.getElementById('location').innerHTML=info.location;
+     document.getElementById('rentalFee0').innerHTML=info.rentalFee[0];
+     document.getElementById('rentalFee1').innerHTML=info.rentalFee[1];
+     document.getElementById('rentalFee2').innerHTML=info.rentalFee[2];
+     document.getElementById('rentalFee3').innerHTML=info.rentalFee[3];
+     document.getElementById('rentalFee4').innerHTML=info.rentalFee[4];
+     document.getElementById('lq0').innerHTML=info.leftQuanByStatus[0];
+     document.getElementById('lq1').innerHTML=info.leftQuanByStatus[1];
+     document.getElementById('lq2').innerHTML=info.leftQuanByStatus[2];
+     document.getElementById('lq3').innerHTML=info.leftQuanByStatus[3];
+     document.getElementById('lq4').innerHTML=info.leftQuanByStatus[4];
+   
+   
+   
+    }
+  </script>
+  <script>
+    var info = <%- JSON.stringify(info) %>;
+    update(info)
+  </script>
+</body>

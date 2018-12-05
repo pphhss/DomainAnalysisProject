@@ -55,5 +55,29 @@ router.get('/inputSearchInfo', function (req, res) {
   });
 });
 
+router.get('/selectItem', function (req, res) {
+  rentalServiceHandler.selectItem(req.session.user.id, Number(req.query.itemID), function (itemdes) {
+
+    var lqbs = [0, 0, 0, 0, 0];
+    for (var i = 0; i < itemdes.availList.length; i++)
+      lqbs[itemdes.availList[i].status]++
+
+
+    var info = {
+      itemID: itemdes.itemID,
+      name: itemdes.name,
+      leftQuan: itemdes.leftQuan,
+      deposit: itemdes.deposit,
+      policy: itemdes.policy,
+      term: itemdes.term,
+      location: itemdes.location,
+      rentalFee: itemdes.rentalFee,
+      leftQuanByStatus: lqbs
+    }
+    res.render('layouts/layout', { info:info,body: "../borrowItem/selectItem", title: "good", session: req.csession });
+
+  });
+
+});
 
 module.exports = router;
