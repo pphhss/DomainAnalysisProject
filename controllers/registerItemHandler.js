@@ -1,4 +1,9 @@
-
+/**
+ * RegisterItemHandler
+ * 
+ * this class is reposible for system operation.
+ * this class is Singleton
+ */
 var instance = null;
 
 function RegisterItemHandler() {

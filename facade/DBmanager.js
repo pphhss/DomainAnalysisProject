@@ -83,7 +83,7 @@ DBmanager.prototype.getmaxitemid = function (callback) {
 /**
  *  method : recordItem
  * 
- *  
+ *  register item into db
  * 
  */
 DBmanager.prototype.recordItem = function (item, callback) {
@@ -105,7 +105,10 @@ DBmanager.prototype.recordItem = function (item, callback) {
     });
   });
 }
-
+/**
+ * record data about item into DB
+ * 
+ */
 DBmanager.prototype.recordItemDes_Item = function (itemID, item) {
   var query3 = "INSERT INTO itemdes_item SET ?"
   console.log("ITEMDESITEM" + item.sn)
@@ -187,7 +190,11 @@ DBmanager.prototype.getBorrowerPoint = function (ID, callback) {
     });
   });
 }
-
+/**
+ *  method : getmaxrentalid
+ * 
+ *  return MAX rentalID in DB
+ */
 DBmanager.prototype.getmaxrentalid = function (callback) {
   var query = "SELECT MAX(rentalID) FROM rentalservice";
   this.pool.getConnection(function (err, conn) {
@@ -198,7 +205,12 @@ DBmanager.prototype.getmaxrentalid = function (callback) {
     });
   });
 }
-
+/**
+ *  method : getSearchInfo
+ * 
+ *  return results of search by keyword and category
+ * 
+ */
 DBmanager.prototype.getSearchInfo = function (keyword, category, callback) {
   var query = "SELECT * FROM (SELECT itemID,name,term,deposit,rentalFee0,rentalFee1,rentalFee2,rentalFee3,rentalFee4,leftQuan FROM itemdes WHERE keyword LIKE '%" + keyword + "%' OR category LIKE '%" + category + "%') t1 INNER JOIN (SELECT itemID,count(itemID) FROM itemdes_item GROUP BY itemID) t2 ON t1.itemID = t2.itemID "
 
@@ -212,7 +224,11 @@ DBmanager.prototype.getSearchInfo = function (keyword, category, callback) {
     });
   });
 }
-
+/**
+ *  method : getItemInfo
+ * 
+ *  return itemdescription which has the itemID
+ */
 DBmanager.prototype.getItemInfo = function (itemID, callback) {
   var query = "SELECT * FROM itemdes WHERE itemID = " + itemID;
   this.pool.getConnection(function (err, conn) {
@@ -225,7 +241,12 @@ DBmanager.prototype.getItemInfo = function (itemID, callback) {
     });
   })
 }
-
+/**
+ *  method : getItemDesList
+ * 
+ *  return list of list that represents item avaliable and used
+ * 
+ */
 DBmanager.prototype.getItemDesList = function (itemID, callback) {
   var avail = []
   var used = []
