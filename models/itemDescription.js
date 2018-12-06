@@ -24,7 +24,42 @@ function ItemDescription(data) {
 
 
 }
+ItemDescription.prototype.getItems = function (quans) {
+  var itemList = [];
+  var k = 0
+  for (var i = 0; i < quans.length; i++) {
+    for (var j = 0; j < this.availList.length; j++) {
+      if (this.availList[j].status == i) {
+        itemList.push(this.availList[j])
+        k++;
+        if (k == quans[i])
+          break;
+      }
 
+    }
+    k = 0;
+
+  }
+  return itemList;
+}
+
+ItemDescription.prototype.getRentalFees = function () {
+  return this.rentalFee
+}
+
+ItemDescription.prototype.changeInfo = function (items) {
+  for (var i = 0; i < items.length; i++)
+    for (var j = 0; j < this.availList.length; j++)
+      if (this.availList[j] == items[i]) {
+        this.availList.splice(j, 1);
+        this.usedList.push(items[i]);
+        DBmanager.updateItemBorrowable(items[i].sn)
+      }
+  
+  this.leftQuan = this.leftQuan - items.length;
+  DBmanager.updateItemDesLeftQuan(this.itemID,this.leftQuan)
+  console.dir(this);
+}
 
 exports.recreate = function (data) {
   var item = new ItemDescription(data);
@@ -49,7 +84,7 @@ exports.recreate = function (data) {
   for (var i = 0; i < data.usedList.length; i++) {
     var j = i;
     DBmanager.getItemInfo(data.usedList[j], function (info) {
-      item.usedList.push(itemcreator(info.status, info.sn))
+      item.usedList.push(itemcreator.create(info.status, info.sn))
     });
   }
 

@@ -239,6 +239,79 @@ DBmanager.prototype.getItemInfo = function (sn, callback) {
   })
 }
 
+DBmanager.prototype.updateItemBorrowable = function (sn) {
+  var sql = "UPDATE itemdes_item SET borrowable=0 WHERE sn=" + sn;
+  this.pool.getConnection(function (err, conn) {
+    if (err)
+      throw err;
+    conn.query(sql, function (err, results) {
+      if (err)
+        throw err;
+      conn.release();
+    });
+  });
+}
+
+DBmanager.prototype.updateItemDesLeftQuan = function (itemID, lq) {
+  var sql = "UPDATE itemdes SET leftQuan=" + lq + " WHERE itemID = " + itemID;
+  this.pool.getConnection(function (err, conn) {
+    if (err)
+      throw err;
+    conn.query(sql, function (err, results) {
+      if (err)
+        throw err;
+      conn.release();
+    });
+  });
+}
+
+DBmanager.prototype.recordRentalService = function (rs, callback) {
+  var query = "SELECT MAX(rentalID) FROM rentalservice";
+  var sql = "INSERT INTO rentalservice(rentalID,rentalFee,rentalTerm,borrowingLocation,datetime,borrowerID) VALUES ?"
+  this.pool.getConnection(function (err, conn) {
+    conn.query(query, function (err, results) {
+      if (err)
+        throw err;
+      var values = [results[0]["MAX(rentalID)"] + 1, rs.rentalFee, rs.term, rs.borrowingLocation, null, rs.borrowerID];
+      console.dir(values);
+      conn.query(sql, [[values]], function (err, results) {
+        if (err)
+          throw err;
+        conn.release();
+      })
+      callback(results[0]["MAX(rentalID)"]);
+    });
+  });
+}
+DBmanager.prototype.recordRentalItemList = function (rentalID, ril) {
+  var values = [];
+  var sql = "INSERT INTO rentalitemlist(rentalID,sn) VALUES ?"
+  for (var i = 0; i < ril.list.length; i++)
+    values.push([rentalID + 1, ril.list[i].sn]);
+
+  this.pool.getConnection(function (err, conn) {
+    if (err)
+      throw err;
+    conn.query(sql, [values], function (err, results) {
+      if (err)
+        throw err;
+      conn.release();
+    })
+  });
+}
+
+DBmanager.prototype.updatePoint = function (id, p) {
+  console.log(id+"/"+p);
+  var sql = "UPDATE user SET point = " + p + " WHERE id='" + id + "'"
+  this.pool.getConnection(function (err, conn) {
+    if (err)
+      throw err;
+    conn.query(sql, function (err, results) {
+      if (err)
+        throw err;
+    })
+  })
+}
 
 exports.getInstance = function () {
   if (instance == null) {

@@ -74,10 +74,21 @@ router.get('/selectItem', function (req, res) {
       rentalFee: itemdes.rentalFee,
       leftQuanByStatus: lqbs
     }
-    res.render('layouts/layout', { info:info,body: "../borrowItem/selectItem", title: "good", session: req.csession });
+    res.render('layouts/layout', { info: info, body: "../borrowItem/selectItem", title: "good", session: req.csession });
 
   });
 
+});
+
+router.post('/inputRentalInfo', function (req, res) {
+  rentalServiceHandler.inputRentalInfo(req.session.user.id, [Number(req.body.q0), Number(req.body.q1), Number(req.body.q2), Number(req.body.q3), Number(req.body.q4)], req.body.loc, Number(req.body.term), function (info) {
+    res.render('layouts/layout', { info: info, body: "../borrowItem/acceptRental", title: "good", session: req.csession });
+  });
+});
+
+router.get('/acceptRental',function(req,res){
+  rentalServiceHandler.acceptRental(req.session.user.id);
+  res.redirect("/");
 });
 
 module.exports = router;

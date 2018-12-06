@@ -4,7 +4,11 @@ var instance = null;
 function RegisterItemHandler() {
   this.rsList = [];
 }
-
+/**
+ *  method : makeRegisterItem
+ * 
+ *  make RegisrationService instance
+ */
 RegisterItemHandler.prototype.makeRegisterItem = function (lenderID) {
   for (var i = 0; i < this.rsList.length; i++)
     if (this.rsList[i][0] == lenderID)
@@ -12,7 +16,12 @@ RegisterItemHandler.prototype.makeRegisterItem = function (lenderID) {
   this.rsList.push([lenderID, require('../models/registrationService').create()])
 
 }
-
+/**
+ * method : enterItemInfo
+ * 
+ * 
+ * 
+ */
 RegisterItemHandler.prototype.enterItemInfo = function (lenderID, data) {
   var rs = null;
 
@@ -23,7 +32,7 @@ RegisterItemHandler.prototype.enterItemInfo = function (lenderID, data) {
 
 
 
-  rs.setItemInfo(lenderID, data);
+  rs.setItemInfo(lenderID, data); //set iteminfo
 
 }
 

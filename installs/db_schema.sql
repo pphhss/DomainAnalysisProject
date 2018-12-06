@@ -54,10 +54,17 @@ CREATE TABLE rentalservice(
   rentalTerm int(10) not null,
   borrowingLocation varchar(100) not null,
   datetime datetime,
-  rentalItemListID int(10) not null,
   borrowerID varchar(100) not null,
   PRIMARY KEY(rentalID),
-  FOREIGN KEY(borrowerID) REFERENCES user(id),
+  FOREIGN KEY(borrowerID) REFERENCES user(id)
+)
+
+CREATE TABLE rentalitemlist(
+  rentalID int(10) not null,
+  sn int(10) not null,
+  PRIMARY KEY(rentalID,sn),
+  FOREIGN KEY(rentalID) REFERENCES rentalservice(rentalID),
+  FOREIGN KEY(sn) REFERENCES item(sn)
 )
 
 

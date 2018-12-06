@@ -1,0 +1,38 @@
+<body>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Value</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">rentalFee</th>
+        <td id="rf"></td>
+      </tr>
+      <tr>
+        <th scope="row">Deposit</th>
+        <td id="dp"></td>
+      </tr>
+      <tr>
+        <th scope="row">Term</th>
+        <td id="tm"></td>
+      </tr>
+      <tr>
+        <th scope="row">Total</th>
+        <td id="total"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a href="/borrowItem/acceptRental" class="btn btn-success">Accept</a>
+  <script>
+    var info = <%- JSON.stringify(info) %>;
+    document.getElementById('rf').innerHTML = info.rentalFee;
+    document.getElementById('dp').innerHTML = info.deposit;
+    document.getElementById('tm').innerHTML = info.term
+    document.getElementById('total').innerHTML = info.rentalFee + info.deposit;
+  </script>
+</body>

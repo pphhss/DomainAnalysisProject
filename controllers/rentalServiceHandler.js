@@ -1,7 +1,7 @@
 
 var instance = null
 
-var ItemList = require('../models/itemList').getInstance();
+
 var DBmanager = require('../facade/DBmanager').getInstance();
 
 function RentalServiceHandler() {
@@ -11,7 +11,7 @@ function RentalServiceHandler() {
 RentalServiceHandler.prototype.makeRentalService = function (borrowID) {
   for (var i = 0; i < this.rsList.length; i++)
     if (this.rsList[i][0] == borrowID)
-       this.rsList.splice(i,1);
+      this.rsList.splice(i, 1);
   this.rsList.push([borrowID, require('../models/rentalService').create(borrowID)]);
 }
 
@@ -24,7 +24,7 @@ RentalServiceHandler.prototype.inputSearchInfo = function (keyword, category, ca
 }
 
 
-RentalServiceHandler.prototype.selectItem = function (borrowID, itemID,callback) {
+RentalServiceHandler.prototype.selectItem = function (borrowID, itemID, callback) {
   var rs = null;
 
   for (var i = 0; i < this.rsList.length; i++)
@@ -34,15 +34,29 @@ RentalServiceHandler.prototype.selectItem = function (borrowID, itemID,callback)
 
 
 
-  rs.setRentalItem(itemID,callback);
+  rs.setRentalItem(itemID, callback);
 
 }
 
 
 
+RentalServiceHandler.prototype.inputRentalInfo = function (borrowID, quans, location, term, callback) {
+  var rs = null;
 
+  for (var i = 0; i < this.rsList.length; i++)
+    if (this.rsList[i][0] == borrowID)
+      rs = this.rsList[i][1];
+  rs.setRentalInfo(quans, location, term, callback);
+}
 
+RentalServiceHandler.prototype.acceptRental = function (borrowID) {
+  var rs = null;
 
+  for (var i = 0; i < this.rsList.length; i++)
+    if (this.rsList[i][0] == borrowID)
+      rs = this.rsList[i][1];
+  rs.payPoint();
+}
 
 
 

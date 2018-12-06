@@ -39,10 +39,12 @@
 
       var itemID = tr.getAttribute("itemID");
 
-       window.location.href = "/borrowItem/selectItem?itemID=" + itemID;
+      window.location.href = "/borrowItem/selectItem?itemID=" + itemID;
     }
 
     function update(results) {
+
+
       var tbody = document.getElementById("list");
 
       while (tbody.firstChild)
@@ -91,8 +93,17 @@
     }
 
     function search() {
+      var tbody = document.getElementById("list");
+
+      while (tbody.firstChild)
+        tbody.removeChild(tbody.firstChild);
+
       var category = document.getElementById('category').value;
+      if (category == "")
+        category = "1351315532135132153";
       var keyword = document.getElementById('keyword').value;
+      if (keyword == "")
+        keyword = "1fasidlkfm3flmf910fsf09f";
 
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {

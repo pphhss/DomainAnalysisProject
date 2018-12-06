@@ -66,6 +66,43 @@
       </tr>
     </tbody>
   </table>
+
+  <form action="/borrowItem/inputRentalInfo" method="POST">
+    <input name="itemID" id="itemIDD" style="display:none;">
+    <div class="form-group">
+      <label for="exampleInputEmail1">status0</label>
+      <input type="text" class="form-control" name="q0" id="exampleInputEmail11" aria-describedby="emailHelp" placeholder="Enter quantity">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">status1</label>
+      <input type="text" class="form-control" name="q1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">status2</label>
+      <input type="text" class="form-control" name="q2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">status3</label>
+      <input type="text" class="form-control" name="q3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">status4</label>
+      <input type="text" class="form-control" name="q4" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Location</label>
+      <input type="text" class="form-control" name="loc" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Location">
+    </div>  
+    <div class="form-group">
+      <label for="exampleInputEmail1">Term</label>
+      <input type="text" class="form-control" name="term" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Term">
+    </div>  
+    
+    <button type="submit" class="btn btn-success">Rent</button>
+  </form>
+
+  
+
   <script>
     function update(info){
       document.getElementById('itemID').innerHTML=info.itemID;
@@ -85,6 +122,7 @@
      document.getElementById('lq2').innerHTML=info.leftQuanByStatus[2];
      document.getElementById('lq3').innerHTML=info.leftQuanByStatus[3];
      document.getElementById('lq4').innerHTML=info.leftQuanByStatus[4];
+     document.getElementById('itemIDD').value = info.itemID;
    
    
    
