@@ -7,7 +7,12 @@ function LoginHandler(){
 
 }
 
-
+/**
+ *  method : acceptLogin()
+ * 
+ *  if System judges that user is valid, then System create session.
+ * 
+ */
 LoginHandler.prototype.acceptLogin = function(id,pw,callback){
   var DBmanager = require('../facade/DBmanager').getInstance();
   DBmanager.login(id,pw,function(err,results){

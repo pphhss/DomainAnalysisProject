@@ -1,135 +1,148 @@
 <body>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">ItemID</th>
-        <td scope="col" id="itemID">1234</td>
-        <th scope="col">Name</th>
-        <td scope="col" id="name">사과</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">LeftQuantity</th>
-        <td id="leftQuan">4000</td>
-        <th>Deposit</th>
-        <td id="deposit">40000</td>
-      </tr>
-      <tr>
-        <th scope="row">Policy</th>
-        <td id="policy">이렇궁저렇궁</td>
-        <th>Term</th>
-        <td id="term">50000</td>
-      </tr>
-      <tr>
-        <th scope="row">Location</th>
-        <td id="location">Ajou University</td>
+  <div class="container shadow rounded">
+    <h2 class="text-center">ItemDescription</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ItemID</th>
+          <td scope="col" id="itemID">1234</td>
+          <th scope="col">Name</th>
+          <td scope="col" id="name">사과</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">LeftQuantity</th>
+          <td id="leftQuan">4000</td>
+          <th>Deposit</th>
+          <td id="deposit">40000</td>
+        </tr>
+        <tr>
+          <th scope="row">Policy</th>
+          <td id="policy">이렇궁저렇궁</td>
+          <th>Term</th>
+          <td id="term">50000</td>
+        </tr>
+        <tr>
+          <th scope="row">Location</th>
+          <td id="location">Ajou University</td>
 
-      </tr>
-    </tbody>
-  </table>
+        </tr>
+      </tbody>
+    </table>
+    <hr class="my-4">
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Status</th>
+          <th scope="col">RentalFee</th>
+          <th scope="col">leftQuantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">0</th>
+          <td id="rentalFee0">12313</td>
+          <td id="lq0">4</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td id="rentalFee1">50000</td>
+          <td id="lq1">4</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td id="rentalFee2">50000</td>
+          <td id="lq2">4</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td id="rentalFee3">50000</td>
+          <td id="lq3">4</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td id="rentalFee4">50000</td>
+          <td id="lq4">4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container shadow rounded">
+    <form action="/borrowItem/inputRentalInfo" method="POST">
+      <input name="itemID" id="itemIDD" style="display:none;">
+      <div class="form-group">
+        <label for="exampleInputEmail1">status0</label>
+        <input type="text" class="form-control" name="q0" id="exampleInputEmail11" aria-describedby="emailHelp"
+          placeholder="Enter quantity">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">status1</label>
+        <input type="text" class="form-control" name="q1" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter quantity">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">status2</label>
+        <input type="text" class="form-control" name="q2" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter quantity">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">status3</label>
+        <input type="text" class="form-control" name="q3" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter quantity">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">status4</label>
+        <input type="text" class="form-control" name="q4" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter quantity">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Location</label>
+        <input type="text" class="form-control" name="loc" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter Location">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Term</label>
+        <input type="text" class="form-control" name="term" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter Term">
+      </div>
+
+      <button type="submit" class="btn btn-success">Rent</button>
+    </form>
+  </div>
 
 
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Status</th>
-        <th scope="col">RentalFee</th>
-        <th scope="col">leftQuantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">0</th>
-        <td id="rentalFee0">12313</td>
-        <td id="lq0">4</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td id="rentalFee1">50000</td>
-        <td id="lq1">4</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td id="rentalFee2">50000</td>
-        <td id="lq2">4</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td id="rentalFee3">50000</td>
-        <td id="lq3">4</td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td id="rentalFee4">50000</td>
-        <td id="lq4">4</td>
-      </tr>
-    </tbody>
-  </table>
 
-  <form action="/borrowItem/inputRentalInfo" method="POST">
-    <input name="itemID" id="itemIDD" style="display:none;">
-    <div class="form-group">
-      <label for="exampleInputEmail1">status0</label>
-      <input type="text" class="form-control" name="q0" id="exampleInputEmail11" aria-describedby="emailHelp" placeholder="Enter quantity">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">status1</label>
-      <input type="text" class="form-control" name="q1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">status2</label>
-      <input type="text" class="form-control" name="q2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">status3</label>
-      <input type="text" class="form-control" name="q3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">status4</label>
-      <input type="text" class="form-control" name="q4" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter quantity">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Location</label>
-      <input type="text" class="form-control" name="loc" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Location">
-    </div>  
-    <div class="form-group">
-      <label for="exampleInputEmail1">Term</label>
-      <input type="text" class="form-control" name="term" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Term">
-    </div>  
-    
-    <button type="submit" class="btn btn-success">Rent</button>
-  </form>
-
-  
 
   <script>
-    function update(info){
-      document.getElementById('itemID').innerHTML=info.itemID;
-      document.getElementById('name').innerHTML=info.name;
-     document.getElementById('leftQuan').innerHTML=info.leftQuan;
-     document.getElementById('deposit').innerHTML=info.deposit;
-     document.getElementById('policy').innerHTML=info.policy;
-     document.getElementById('term').innerHTML=info.term;
-     document.getElementById('location').innerHTML=info.location;
-     document.getElementById('rentalFee0').innerHTML=info.rentalFee[0];
-     document.getElementById('rentalFee1').innerHTML=info.rentalFee[1];
-     document.getElementById('rentalFee2').innerHTML=info.rentalFee[2];
-     document.getElementById('rentalFee3').innerHTML=info.rentalFee[3];
-     document.getElementById('rentalFee4').innerHTML=info.rentalFee[4];
-     document.getElementById('lq0').innerHTML=info.leftQuanByStatus[0];
-     document.getElementById('lq1').innerHTML=info.leftQuanByStatus[1];
-     document.getElementById('lq2').innerHTML=info.leftQuanByStatus[2];
-     document.getElementById('lq3').innerHTML=info.leftQuanByStatus[3];
-     document.getElementById('lq4').innerHTML=info.leftQuanByStatus[4];
-     document.getElementById('itemIDD').value = info.itemID;
-   
-   
-   
+    function update(info) {
+      document.getElementById('itemID').innerHTML = info.itemID;
+      document.getElementById('name').innerHTML = info.name;
+      document.getElementById('leftQuan').innerHTML = info.leftQuan;
+      document.getElementById('deposit').innerHTML = info.deposit;
+      document.getElementById('policy').innerHTML = info.policy;
+      document.getElementById('term').innerHTML = info.term;
+      document.getElementById('location').innerHTML = info.location;
+      document.getElementById('rentalFee0').innerHTML = info.rentalFee[0];
+      document.getElementById('rentalFee1').innerHTML = info.rentalFee[1];
+      document.getElementById('rentalFee2').innerHTML = info.rentalFee[2];
+      document.getElementById('rentalFee3').innerHTML = info.rentalFee[3];
+      document.getElementById('rentalFee4').innerHTML = info.rentalFee[4];
+      document.getElementById('lq0').innerHTML = info.leftQuanByStatus[0];
+      document.getElementById('lq1').innerHTML = info.leftQuanByStatus[1];
+      document.getElementById('lq2').innerHTML = info.leftQuanByStatus[2];
+      document.getElementById('lq3').innerHTML = info.leftQuanByStatus[3];
+      document.getElementById('lq4').innerHTML = info.leftQuanByStatus[4];
+      document.getElementById('itemIDD').value = info.itemID;
+
+
+
     }
   </script>
   <script>
-    var info = <%- JSON.stringify(info) %>;
-    update(info)
+    var info =<%- JSON.stringify(info) %>;
+      update(info)
   </script>
 </body>

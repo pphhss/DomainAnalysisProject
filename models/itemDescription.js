@@ -53,11 +53,11 @@ ItemDescription.prototype.changeInfo = function (items) {
       if (this.availList[j] == items[i]) {
         this.availList.splice(j, 1);
         this.usedList.push(items[i]);
-        DBmanager.updateItemBorrowable(items[i].sn)
+        DBmanager.updateItemBorrowable(items[i].sn) // recordItem함수의 일부분
       }
   
   this.leftQuan = this.leftQuan - items.length;
-  DBmanager.updateItemDesLeftQuan(this.itemID,this.leftQuan)
+  DBmanager.updateItemDesLeftQuan(this.itemID,this.leftQuan)// recordItem함수의 일부분
   console.dir(this);
 }
 
@@ -76,14 +76,14 @@ exports.recreate = function (data) {
 
   for (var i = 0; i < data.availList.length; i++) {
     var j = i;
-    DBmanager.getItemInfo(data.availList[j], function (info) {
+    DBmanager.getItemList(data.availList[j], function (info) {
       item.availList.push(itemcreator.create(info.status, info.sn));
     });
   }
 
   for (var i = 0; i < data.usedList.length; i++) {
     var j = i;
-    DBmanager.getItemInfo(data.usedList[j], function (info) {
+    DBmanager.getItemList(data.usedList[j], function (info) {
       item.usedList.push(itemcreator.create(info.status, info.sn))
     });
   }

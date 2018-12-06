@@ -1,4 +1,9 @@
-
+/**
+ * RentalServiceHandler
+ * 
+ * this class is reposible for system operation.
+ * this class is Singleton
+ */
 var instance = null
 
 
@@ -7,12 +12,16 @@ var DBmanager = require('../facade/DBmanager').getInstance();
 function RentalServiceHandler() {
   this.rsList = []
 }
-
+/**\
+ *  method : makeRentalService
+ * 
+ *  make RentalService instance.
+ */
 RentalServiceHandler.prototype.makeRentalService = function (borrowID) {
   for (var i = 0; i < this.rsList.length; i++)
-    if (this.rsList[i][0] == borrowID)
-      this.rsList.splice(i, 1);
-  this.rsList.push([borrowID, require('../models/rentalService').create(borrowID)]);
+    if (this.rsList[i][0] == borrowID) // if there is same id in rsList(borrower re-access system), System delete previous instance.
+      this.rsList.splice(i, 1); 
+  this.rsList.push([borrowID, require('../models/rentalService').create(borrowID)]); // push rs into list
 }
 
 RentalServiceHandler.prototype.inputSearchInfo = function (keyword, category, callback) {

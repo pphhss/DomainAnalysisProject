@@ -13,7 +13,7 @@ BorrowerInfo.prototype.setPoint = function(p){
 }
 BorrowerInfo.prototype.updatePoint = function(){
   console.log(this.borrowerID+"/"+this.point);
-  DBmanager.updatePoint(this.borrowerID,this.point);
+  DBmanager.recordBorrowerInfo(this.borrowerID,this.point);
 }
 exports.create = function(borrowerID,point){
   return new BorrowerInfo(borrowerID,point);

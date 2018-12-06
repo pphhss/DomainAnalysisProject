@@ -1,1 +1,12 @@
-getDeposit 해야합니다
+getInfo
+getBorrowerPoint
+
+getItemDes
+getItemInfo
+
+
+getItemInfo
+getItemList
+
+updatePoint
+recordBorrowerInfo

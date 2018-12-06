@@ -1,5 +1,5 @@
 /**
- * DBmanager(singleton)
+ * DBmanager(singleton) - facade
  * 
  * 
  */
@@ -25,7 +25,12 @@ DBmanager.prototype.init = function () {
     dateStrings: 'date'
   });
 };
-
+/**
+ *  method : login()
+ * 
+ *  handle user login.
+ * 
+ */
 DBmanager.prototype.login = function (id, pw, callback) {
   var query = "SELECT * FROM user WHERE id=" + this.pool.escape(id) + " AND pw=" + this.pool.escape(pw);
   this.pool.getConnection(function (err, conn) {
@@ -44,7 +49,11 @@ DBmanager.prototype.login = function (id, pw, callback) {
   });
 };
 
-
+/**
+ *  method : getmaxsn()
+ *  
+ *  return MAX serialnumber of item.
+ */
 DBmanager.prototype.getmaxsn = function (callback) {
   var query = "SELECT MAX(sn) FROM item";
   this.pool.getConnection(function (err, conn) {
@@ -56,6 +65,11 @@ DBmanager.prototype.getmaxsn = function (callback) {
   });
 };
 
+/**
+ *  method : getmaxitemid
+ * 
+ *  return MAX itemID of itemdescription
+ */
 DBmanager.prototype.getmaxitemid = function (callback) {
   var query = "SELECT MAX(itemID) FROM itemdes";
   this.pool.getConnection(function (err, conn) {
@@ -66,7 +80,12 @@ DBmanager.prototype.getmaxitemid = function (callback) {
     });
   });
 }
-
+/**
+ *  method : recordItem
+ * 
+ *  
+ * 
+ */
 DBmanager.prototype.recordItem = function (item, callback) {
   var query2 = "INSERT INTO item SET ?"
   console.log("ITEM" + item.sn)
@@ -146,9 +165,14 @@ DBmanager.prototype.recordItemDes = function (itemdes, callback) {
 
   });
 }
+/**
+ *  method : getBorrowerPoint
+ * 
+ *  return borrower point.
+ * 
+ */
 
-
-DBmanager.prototype.getInfo = function (ID, callback) {
+DBmanager.prototype.getBorrowerPoint = function (ID, callback) {
   var sql = "SELECT point FROM user WHERE id=" + this.pool.escape(ID);
   this.pool.getConnection(function (err, conn) {
     if (err)
@@ -189,7 +213,7 @@ DBmanager.prototype.getSearchInfo = function (keyword, category, callback) {
   });
 }
 
-DBmanager.prototype.getItemDes = function (itemID, callback) {
+DBmanager.prototype.getItemInfo = function (itemID, callback) {
   var query = "SELECT * FROM itemdes WHERE itemID = " + itemID;
   this.pool.getConnection(function (err, conn) {
     if (err)
@@ -224,7 +248,7 @@ DBmanager.prototype.getItemDesList = function (itemID, callback) {
   });
 }
 
-DBmanager.prototype.getItemInfo = function (sn, callback) {
+DBmanager.prototype.getItemList = function (sn, callback) {
   var sql = "SELECT * FROM item WHERE sn=" + sn;
   this.pool.getConnection(function (err, conn) {
     if (err)
@@ -300,8 +324,8 @@ DBmanager.prototype.recordRentalItemList = function (rentalID, ril) {
   });
 }
 
-DBmanager.prototype.updatePoint = function (id, p) {
-  console.log(id+"/"+p);
+DBmanager.prototype.recordBorrowerInfo = function (id, p) {
+  console.log(id + "/" + p);
   var sql = "UPDATE user SET point = " + p + " WHERE id='" + id + "'"
   this.pool.getConnection(function (err, conn) {
     if (err)
