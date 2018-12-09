@@ -3,10 +3,11 @@
  * 
  */
 var session = function(req,res,next){
-  var sending;
+  var sending={};
   if(req.session.user){
-    sending = req.session.user.id;
-    sending = JSON.stringify(sending);
+    sending.id = req.session.user.id;
+    sending.point = req.session.user.point;
+    
   }else{
     sending="none"
   }

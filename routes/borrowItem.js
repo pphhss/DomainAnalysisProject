@@ -87,8 +87,12 @@ router.post('/inputRentalInfo', function (req, res) {
 });
 
 router.get('/acceptRental',function(req,res){
-  rentalServiceHandler.acceptRental(req.session.user.id);
-  res.redirect("/");
+  rentalServiceHandler.acceptRental(req.session.user.id, function(p){
+    req.session.user.point = p;
+    res.redirect("/");
+  });
+  
+  
 });
 
 module.exports = router;

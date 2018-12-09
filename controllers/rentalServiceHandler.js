@@ -58,13 +58,13 @@ RentalServiceHandler.prototype.inputRentalInfo = function (borrowID, quans, loca
   rs.setRentalInfo(quans, location, term, callback);
 }
 
-RentalServiceHandler.prototype.acceptRental = function (borrowID) {
+RentalServiceHandler.prototype.acceptRental = function (borrowID,callback) {
   var rs = null;
 
   for (var i = 0; i < this.rsList.length; i++)
     if (this.rsList[i][0] == borrowID)
       rs = this.rsList[i][1];
-  rs.payPoint();
+  rs.payPoint(callback);
 }
 
 

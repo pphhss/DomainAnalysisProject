@@ -4,6 +4,8 @@
 
 CREATE DATABASE domain;
 
+USE domain;
+
 CREATE TABLE user(
     id varchar(50) not null,
     pw varchar(50) not null,
@@ -57,7 +59,7 @@ CREATE TABLE rentalservice(
   borrowerID varchar(100) not null,
   PRIMARY KEY(rentalID),
   FOREIGN KEY(borrowerID) REFERENCES user(id)
-)
+);
 
 CREATE TABLE rentalitemlist(
   rentalID int(10) not null,
@@ -65,7 +67,7 @@ CREATE TABLE rentalitemlist(
   PRIMARY KEY(rentalID,sn),
   FOREIGN KEY(rentalID) REFERENCES rentalservice(rentalID),
   FOREIGN KEY(sn) REFERENCES item(sn)
-)
+);
 
 
 

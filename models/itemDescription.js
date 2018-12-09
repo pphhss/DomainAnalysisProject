@@ -2,7 +2,12 @@ var itemcreator = require('./item');
 var DBmanager = require('../facade/DBmanager').getInstance();
 
 
-
+/**
+ *  Constructor : ItemDescription
+ * 
+ * 
+ * 
+ */
 function ItemDescription(data) {
   this.name = data.name;
   this.category = data.category;
@@ -11,19 +16,26 @@ function ItemDescription(data) {
   this.policy = data.policy;
   this.term = data.term;
   this.location = data.location;
+  //rentalFee is list that has rentalFees by statues
   this.rentalFee = [];
+
+  // availList is list that has borrowable Item instances 
   this.availList = [];
+
+  // usedList is list that has non-borrowable Item instance.
   this.usedList = [];
   this.itemID = 0;
   this.leftQuan = 0;
   this.lenderID = 0;
 
-
-
-
-
-
 }
+
+/**
+ *  method : getItem
+ * 
+ *  return list of item instances that matches the status in availList.
+ * 
+ */
 ItemDescription.prototype.getItems = function (quans) {
   var itemList = [];
   var k = 0
@@ -47,19 +59,27 @@ ItemDescription.prototype.getRentalFees = function () {
   return this.rentalFee
 }
 
+/**
+ * method : changeInfo
+ * 
+ *  move Item instances from avaliList to userList
+ * 
+ *  record changed information into DB
+ * 
+ */
 ItemDescription.prototype.changeInfo = function (items) {
   for (var i = 0; i < items.length; i++)
     for (var j = 0; j < this.availList.length; j++)
       if (this.availList[j] == items[i]) {
-        this.availList.splice(j, 1);
-        this.usedList.push(items[i]);
+        this.availList.splice(j, 1); //remove Item instance.
+        this.usedList.push(items[i]); // add Item instance.
         DBmanager.updateItemBorrowable(items[i].sn) // recordItem함수의 일부분
       }
   
   this.leftQuan = this.leftQuan - items.length;
   DBmanager.updateItemDesLeftQuan(this.itemID,this.leftQuan)// recordItem함수의 일부분
-  console.dir(this);
 }
+
 
 exports.recreate = function (data) {
   var item = new ItemDescription(data);
@@ -125,7 +145,7 @@ exports.createFirst = function (lenderID, data) {
           DBmanager.recordItem(itemdes.availList[i], function () {
             setTimeout(() => {
               DBmanager.recordItemDes_Item(itemdes.itemID, itemdes.availList[j++]);
-            }, 80);
+            }, 100);
 
           });
         }

@@ -21,7 +21,7 @@
           Login
         </button>
         <% } else { %>
-        <%= session %>님
+        <h3 class="text-primary"><%= session.id %>님</h3>  <p class="text-info"><%= session.point %> point</p>
         <% } %>
 
       </span>
