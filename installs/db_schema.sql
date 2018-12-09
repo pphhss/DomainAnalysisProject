@@ -72,3 +72,4 @@ CREATE TABLE rentalitemlist(
 
 
 INSERT INTO user VALUES('lender','1234',1000);
+
