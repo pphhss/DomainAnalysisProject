@@ -357,6 +357,88 @@ DBmanager.prototype.recordBorrowerInfo = function (id, p) {
     })
   })
 }
+/*****************************ADMIN SECTION************************************** */
+DBmanager.prototype.getAllItemDes = function(callback){
+  var sql = "SELECT * FROM itemdes";
+
+  this.pool.getConnection(function(err,conn){
+    if(err)
+      throw err;
+    conn.query(sql,function(err,results){
+      if(err)
+        throw err;
+      callback(results);
+    });
+  })
+}
+
+DBmanager.prototype.getAllItem = function(callback){
+  var sql = "SELECT * FROM item";
+
+  this.pool.getConnection(function(err,conn){
+    if(err)
+      throw err;
+    conn.query(sql,function(err,results){
+      if(err)
+        throw err;
+      callback(results);
+    });
+  })
+}
+DBmanager.prototype.getAllITI = function(callback){
+  var sql = "SELECT * FROM itemdes_item";
+
+  this.pool.getConnection(function(err,conn){
+    if(err)
+      throw err;
+    conn.query(sql,function(err,results){
+      if(err)
+        throw err;
+      callback(results);
+    });
+  })
+}
+DBmanager.prototype.getAllRS = function(callback){
+  var sql = "SELECT * FROM rentalservice";
+
+  this.pool.getConnection(function(err,conn){
+    if(err)
+      throw err;
+    conn.query(sql,function(err,results){
+      if(err)
+        throw err;
+      callback(results);
+    });
+  })
+}
+DBmanager.prototype.getAllRSL = function(callback){
+  var sql = "SELECT * FROM rentalitemlist";
+
+  this.pool.getConnection(function(err,conn){
+    if(err)
+      throw err;
+    conn.query(sql,function(err,results){
+      if(err)
+        throw err;
+      callback(results);
+    });
+  })
+}
+DBmanager.prototype.getAlluser = function(callback){
+  var sql = "SELECT * FROM user";
+
+  this.pool.getConnection(function(err,conn){
+    if(err)
+      throw err;
+    conn.query(sql,function(err,results){
+      if(err)
+        throw err;
+      callback(results);
+    });
+  })
+}
+
+/*****************************ADMIN SECTION************************************** */
 
 exports.getInstance = function () {
   if (instance == null) {

@@ -24,4 +24,10 @@ router.post('/loginaction', function (req, res, next) {
 
 });
 
+router.get('/logoutaction',function(req,res){
+  req.session.destroy();
+    delete req.csession;
+    res.redirect('/');
+});
+
 module.exports = router;
